@@ -1,0 +1,71 @@
+from higher_lower_game_data import data
+import random
+
+def generate_random_account(data, used_accounts):
+    random_account = random.choice(data)
+    while random_account in used_accounts:
+        random_account = random.choice(data)
+    used_accounts.append(random_account)
+    return random_account
+
+def format_account(account):
+    name = account['name']
+    description = account['description']
+    country = account['country']
+    formatted_account = f"{name}: {description} from {country}"
+    return formatted_account
+
+used_accounts = []
+score = 0
+
+random_account = generate_random_account(data, used_accounts)
+formatted_account = format_account(random_account)
+follower_count = int(random_account['follower_count'])
+
+guessing = True
+while guessing:
+    random_account2 = generate_random_account(data, used_accounts)
+    formatted_account2 = format_account(random_account2)
+    follower_count2 = int(random_account2['follower_count'])
+    
+    print(f"Compare A: {formatted_account}.")
+    print(f"Against B: {formatted_account2}.")
+    
+    guess = (input("A or B? ")).lower()
+    if guess == "a":
+        if follower_count > follower_count2:
+            score += 1
+            print(f"{random_account['name']} has {follower_count} mil followers.")
+            print(f"{random_account2['name']} has {follower_count2} mil followers.")
+            print(f"Correct! Current score: {score}.")
+        else:
+            if score > 0:
+                print(f"Incorrect. Final score: {score}.")
+                print(f"{random_account2['name']} has {follower_count2} mil followers.")
+                guessing = False
+            else:
+                print(f"Incorrect. Final score: {score}.")
+                print(f"{random_account['name']} has {follower_count} mil followers.")
+                print(f"{random_account2['name']} has {follower_count2} mil followers.")
+                guessing = False
+                
+    if guess == "b":
+        if follower_count < follower_count2:
+            score += 1
+            print(f"{random_account2['name']} has {follower_count2} mil followers.")
+            print(f"{random_account['name']} has {follower_count} mil followers.")
+            print(f"Correct! Current score: {score}.")
+            used_accounts.remove(random_account)
+            random_account = random_account2
+            formatted_account = formatted_account2
+            follower_count = follower_count2
+        else:
+            if score > 0:
+                print(f"Incorrect. Final score: {score}.")
+                print(f"{random_account2['name']} has {follower_count2} mil followers.")
+                guessing = False
+            else:
+                print(f"Incorrect. Final score: {score}.")
+                print(f"{random_account['name']} has {follower_count} mil followers.")
+                print(f"{random_account2['name']} has {follower_count2} mil followers.")
+                guessing = False
