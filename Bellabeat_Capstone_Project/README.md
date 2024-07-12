@@ -43,7 +43,7 @@ The analysis uses the FitBit Fitness Tracker Data, which contains personal fitne
 6. High-level recommendations for Bellabeat's marketing strategy
 
 ## Google Site
-For a comprehensive view of the project, including interactive elements and additional resources, visit the [Bellabeat Data Analytics Case Study Google Site]((https://sites.google.com/view/bellabeat-case-study/home)).
+For a comprehensive view of the project, including interactive elements and additional resources, visit the [Bellabeat Data Analytics Case Study Google Site](https://sites.google.com/view/bellabeat-case-study/home).
 
 ## Conclusion
 This case study provides valuable insights into consumer behavior and preferences related to smart device usage. By leveraging these insights, Bellabeat can enhance its product offerings and marketing strategies, empowering women with the knowledge to improve their health and habits.
