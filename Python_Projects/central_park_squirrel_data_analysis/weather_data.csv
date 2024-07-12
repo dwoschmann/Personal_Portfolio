@@ -1,0 +1,12 @@
+# DataFrame: A DataFrame is a two-dimensional, tabular data structure in pandas. In this CSV, each row represents a record (observation) and each column represents a variable (day, temp, condition). The entire set of data can be seen as a DataFrame.
+
+# Series: A Series is a one-dimensional labeled array in pandas. In the DataFrame, each column can be considered a Series. For example, the "day" column is a Series containing labels for each day, and the "temp" column is a Series containing temperature values.
+
+day,temp,condition
+Monday,12,Sunny
+Tuesday,14,Rain
+Wednesday,15,Rain
+Thursday,14,Cloudy
+Friday,21,Sunny
+Saturday,22,Sunny
+Sunday,24,Sunny
