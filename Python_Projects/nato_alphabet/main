@@ -1,0 +1,23 @@
+# TODO 1. Create a dictionary in this format: {"A": "Alfa", "B": "Bravo"}
+
+import pandas
+
+nato_data = pandas.read_csv("nato_phonetic_alphabet.csv")
+print(nato_data.to_dict())
+
+formatted_nato_dict = {row.letter:row.code for (index, row) in nato_data.iterrows()}
+# nato_data.iterrows(): This iterates over the rows of the DataFrame, yielding pairs of the form (index, row) where index is the row index, and row is a pandas Series representing a row of the DataFrame.
+# row.letter: Refers to the value in the "letter" column of the current row.
+# row.code: Refers to the value in the "code" column of the current row.
+# for each row in the nato_data DataFrame, it takes the values in the "letter" column as keys and the values in the "code" column as corresponding values, creating a dictionary.
+
+print(formatted_nato_dict)
+
+
+# TODO 2. Create a list of the phonetic code words from a word that the user inputs.
+
+word = input("Enter a word: ").upper()
+coded_word = [formatted_nato_dict[letter] for letter in word]
+# formatted_nato_dict is created with keys as "letter" and values as "code," this expression retrieves the NATO code corresponding to the current letter in the word. The list comprehension then collects these codes for each letter in the word, creating a list of NATO codes (coded_word).
+
+print(coded_word)
