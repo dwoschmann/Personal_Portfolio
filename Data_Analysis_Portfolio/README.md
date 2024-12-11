@@ -2,7 +2,6 @@ Project Overview
 
 This case study focuses on analyzing COVID-19 data to uncover meaningful insights about the pandemic’s impact across different locations, populations, and vaccination efforts. The project involves importing datasets, transforming data, and performing analysis using SQL and BigQuery.
 
-Progress
 
 Step 1: Downloading and Preparing Datasets
 
@@ -16,11 +15,13 @@ Adjusting data types.
 
 Removing inconsistencies and unnecessary data.
 
+
 Step 2: Importing Datasets
 
 Converted the datasets into CSV format.
 
 Imported the CSV files into BigQuery for efficient querying and analysis.
+
 
 Step 3: SQL Queries and Analysis
 
