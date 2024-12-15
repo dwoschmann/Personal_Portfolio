@@ -25,11 +25,10 @@ SELECT location, date, total_cases, population, (total_cases/population)*100 as 
 
 
 -- Countries with Highest Infection Rate vs Population
-SELECT location, MAX(total_cases) as HighestInfectionCount, population, MAX((total_cases/population))*100 as InfectedPercentage
+SELECT location, population, date, MAX(total_cases) as HighestInfectionCount, MAX((total_cases/population))*100 as InfectedPercentage
   FROM `COVID.CovidDeaths`
-  GROUP BY location, population
+  GROUP BY location, population, date
   ORDER BY InfectedPercentage DESC;
-
 
 -- Countries with Highest Death Count vs Population
 SELECT location, MAX(total_deaths) as TotalDeathCount
