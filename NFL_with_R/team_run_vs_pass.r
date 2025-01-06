@@ -1,14 +1,3 @@
-install.packages(c("nflreadr", "tidyverse", "gt", "gtExtras", "nflfastR", "ggimage", "ggthemes", "ggtext", "ggplot2"))
-library(nflreadr)
-library(tidyverse)
-library(gt)
-library(gtExtras)
-library(nflfastR)
-library(ggimage)
-library(ggthemes)
-library(ggtext)
-library(ggplot2)
-
 pbp_data <- load_pbp(2023)
 
 team_pbp <- pbp_data %>%
