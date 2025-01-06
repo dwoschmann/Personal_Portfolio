@@ -1,21 +1,3 @@
-install.packages(c("nflreadr", "tidyverse", "gt", "gtExtras", "nflfastR", "ggimage", "ggthemes", "ggtext", "ggplot2", "ggrepel"))
-
-library(nflreadr)
-library(tidyverse)
-library(gt)
-library(gtExtras)
-library(nflfastR)
-library(ggimage)
-library(ggthemes)
-library(ggtext)
-library(ggplot2)
-library(ggrepel)
-
-
-?nflfastR
-
-ls("package:nflfastR")
-
 player_stats <- load_player_stats(2024)
 
 team_logos <- load_teams() %>%
