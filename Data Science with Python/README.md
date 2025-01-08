@@ -1,10 +1,6 @@
-# Data Science with Python Course Assignments
-
-Welcome to the Data Science with Python course assignments repository! This repository contains a series of assignments designed to help you learn and practice various concepts in data science using Python. Each assignment focuses on a specific topic, providing you with hands-on experience and opportunities to apply what you've learned.
-
 ## Overview
 
-This repository includes assignments covering fundamental and advanced topics in data science, aimed at developing your skills in data analysis, machine learning, and data visualization using Python libraries such as Pandas, NumPy, Matplotlib, Seaborn, and Scikit-learn.
+This repository includes assignments covering fundamental and advanced topics in data science, data analysis, machine learning, and data visualization using Python libraries such as Pandas, NumPy, Matplotlib, Seaborn, and Scikit-learn.
 
 ## Assignments
 
