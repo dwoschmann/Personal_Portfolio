@@ -2,7 +2,7 @@ player_stats <- load_player_stats(2023)
 
 team_logos <- load_teams() %>%
   select(team_abbr, team_logo_wikipedia) %>%
-  rename(recent_team = team_abbr)  # Rename column to match player stats
+  rename(recent_team = team_abbr)
 
 sacks_rush_epa_QB <- player_stats %>%
   filter(position == "QB") %>%
