@@ -20,8 +20,6 @@ team_logos <- load_teams()
 team_summary <- team_summary %>%
   left_join(team_logos, by = c("posteam" = "team_abbr"))
 
-# Check if the logos are correctly merged
-head(team_summary)
 
 ggplot(team_summary, aes(x = run_ratio, y = pass_ratio)) + 
   geom_image(aes(image = team_logo_wikipedia), size = 0.05) +
