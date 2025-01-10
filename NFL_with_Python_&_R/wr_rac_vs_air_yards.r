@@ -30,7 +30,7 @@ ggplot(wr_air_vs_rac, aes(x = receiving_air_yards, y = receiving_yards_after_cat
   geom_image(aes(image = team_logo_wikipedia), size = 0.04) +
   geom_text_repel(
     aes(label = player_name),
-    size = 3,  # Smaller text size
+    size = 3,
     box.padding = 0.2,
     point.padding = 0.2,
     segment.size = 0.2,
