@@ -1,9 +1,7 @@
-import pandas as pd
 import numpy as np
 import nfl_data_py as nfl
 import seaborn as sns
 import matplotlib.pyplot as plt
-import os
 
 pbp_py = nfl.import_pbp_data([2024])
 
