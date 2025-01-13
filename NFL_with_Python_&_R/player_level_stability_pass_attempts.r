@@ -1,17 +1,3 @@
-install.packages(c("nflreadr", "dplyr", "tidyverse", "gt", "gtExtras", "nflfastR", "ggimage", "ggthemes", "ggtext", "ggplot2", "ggrepel"))
-
-library(nflreadr)
-library(dplyr)
-library(tidyverse)
-library(gt)
-library(gtExtras)
-library(nflfastR)
-library(ggimage)
-library(ggthemes)
-library(ggtext)
-library(ggplot2)
-library(ggrepel)
-
 pbp_r <- load_pbp(2023:2024)
 
 pbp_r_p <-
