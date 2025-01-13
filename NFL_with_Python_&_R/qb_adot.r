@@ -21,9 +21,9 @@ adot_summary <- pbp_r_p |>
     adot = mean(air_yards, na.rm = TRUE)
   ) |>
   filter(n >= 100 & !is.na(passer)) |>
-  arrange(-adot) |>  # Sort by adot in descending order
-  ungroup() |>       # Ungroup to calculate global rankings
-  mutate(rank = row_number()) |>  # Add a global ranking column
+  arrange(-adot) |>
+  ungroup() |>
+  mutate(rank = row_number()) |>
   left_join(team_logos, by = "posteam") |>
   left_join(player_headshots, by = "passer_id") |>
   select(rank, team_logo_wikipedia, headshot_url, passer, n, adot)
