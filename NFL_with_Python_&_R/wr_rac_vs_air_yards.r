@@ -1,11 +1,8 @@
 player_stats <- load_player_stats(2023)
-colnames(player_stats)
-
 
 team_logos <- load_teams() %>%
   select(team_abbr, team_logo_wikipedia) %>%
   rename(recent_team = team_abbr)
-
 
 wr_air_vs_rac <- player_stats %>%
   filter(position == "WR") %>%
@@ -20,7 +17,6 @@ wr_air_vs_rac <- player_stats %>%
     targets = sum(targets)
   ) %>%
   filter(targets >= 50)
-
 
 wr_air_vs_rac <- wr_air_vs_rac %>%
   left_join(team_logos, by = "recent_team")
