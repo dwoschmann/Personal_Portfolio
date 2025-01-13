@@ -6,7 +6,6 @@ team_logos <- load_teams() %>%
 
 pbp <- load_pbp(2024)
 
-
 wr_receiving_yards_epa <- pbp %>%
   filter(!is.na(receiving_yards) & receiving_yards != 0) %>%
   drop_na(epa, receiving_yards) %>%
@@ -28,8 +27,6 @@ wr_receiving_yards_epa <- wr_receiving_yards_epa %>%
 
 wr_receiving_yards_epa <- wr_receiving_yards_epa %>%
   left_join(team_logos, by = "recent_team")
-
-view(wr_receiving_yards_epa)
 
 
 ggplot(wr_receiving_yards_epa, aes(x = total_receiving_yards, y = epa)) +
