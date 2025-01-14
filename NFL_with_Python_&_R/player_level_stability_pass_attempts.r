@@ -62,7 +62,7 @@ pbp_r_p_s_pl <-
 
 
 scatter_ypa_r <- ggplot(pbp_r_p_s_pl, aes(x = ypa_last, y = ypa)) +
-  geom_image(aes(image = headshot_url), size = 0.075) +
+  geom_image(aes(image = headshot_url), size = 0.1) +
   facet_grid(cols = vars(pass_length_air_yards)) +
   labs(
     title = "QB Stability of YPA",
@@ -71,7 +71,6 @@ scatter_ypa_r <- ggplot(pbp_r_p_s_pl, aes(x = ypa_last, y = ypa)) +
     y = "Yards per Attempt, 2024"
     ) +
   theme_bw() +
-  theme(strip.background = element_blank()) +
   geom_smooth(method = "lm")
  
 scatter_ypa_r
