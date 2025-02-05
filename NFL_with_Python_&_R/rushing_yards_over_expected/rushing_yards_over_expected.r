@@ -66,4 +66,48 @@ ryoe_lag_r |>
   select(yards_per_carry, yards_per_carry_last) |>
   cor(use = "complete.obs")
 
-ryoe_lag_r
+# Filter Players who Changed Teams or Stayed with the Same Team
+ryoe_lag_r <- ryoe_lag_r |>
+  mutate(changed_team = posteam != posteam_last)
+
+# Load Player Headshots
+player_headshots <- load_player_stats(seasons = 2023:2024) |>
+  select(player_id, headshot_url) |>
+  rename(rusher_id = player_id) |>
+  distinct(rusher_id, .keep_all = TRUE)
+
+# Merge Headshots with Data
+ryoe_lag_r <- 
+  ryoe_lag_r |>
+  inner_join(player_headshots, by = "rusher_id")
+
+
+ryoe_plot_on_new_teams <-
+  ggplot(ryoe_lag_r |> filter(changed_team == TRUE), aes(x = ryoe_per_last, y = ryoe_per)) +
+  geom_image(aes(image = headshot_url), size = 0.1) +
+  scale_y_continuous(limits = c(-2, 2)) +
+  scale_x_continuous(limits = c(-2, 3.5)) +
+  labs(title = "RYOE Per Attempt: 2023 vs. 2024 | Players who switched teams in 2024",
+       subtitle = "Minimum 50 carries both seasons | Data: nflfastR | Chart: @dumbanalytics",
+       x = "RYOE Per Attempt 2023",
+       y = "RYOE Per Attempt 2024") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+  theme_minimal()
+
+ggsave("ryoe_plot_on_new_teams.png", width = 10, height = 6, dpi = 300, bg = "white")
+
+ryoe_plot_on_same_teams <-
+  ggplot(ryoe_lag_r |> filter(changed_team == FALSE), aes(x = ryoe_per_last, y = ryoe_per)) +
+  geom_image(aes(image = headshot_url), size = 0.1) +
+  scale_y_continuous(limits = c(-2, 2)) +
+  scale_x_continuous(limits = c(-2, 3.5)) +
+  labs(title = "RYOE Per Attempt: 2023 vs. 2024 | Players who stayed with team in 2024",
+       subtitle = "Minimum 50 carries both seasons | Data: nflfastR | Chart: @dumbanalytics",
+       x = "RYOE Per Attempt 2023",
+       y = "RYOE Per Attempt 2024") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+  theme_minimal()
+
+ggsave("ryoe_plot_on_same_teams.png", width = 10, height = 6, dpi = 300, bg = "white")
