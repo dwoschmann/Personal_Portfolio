@@ -1,12 +1,9 @@
-pbp_r <- load_pbp(2023:2024)
-
-# Filter Only Rushing Plays & Handle Missing Data
 pbp_r_rec <-
   pbp_r |>
   filter(play_type == "pass" & !is.na(receiver_id)) |>
   mutate(receiving_yards = ifelse(is.na(receiving_yards), 0, receiving_yards))
 
-# Calculate Rushing Yards Over Expected (RYOE)
+# Calculate Passing Yards Over Expected (RYOE)
 yard_to_go_r <-
   lm(receiving_yards ~ 1 + ydstogo, data = pbp_r_rec)
 
@@ -14,7 +11,7 @@ pbp_r_rec <-
   pbp_r_rec |>
   mutate(ryoe = resid(yard_to_go_r))
 
-# Get Most Frequent Team Each reciever Played for Per Season
+# Get Team Each receiver Played for Per Season
 receiver_teams <- pbp_r_rec |>
   group_by(season, receiver_id, receiver, posteam) |>
   summarize(n = n(), .groups = "drop") |>
@@ -34,7 +31,7 @@ ryoe_r <-
     .groups = "drop"
   ) |>
   arrange(-ryoe_total) |>
-  filter(n > 30) |>  # Filter for players with more than 50 carries
+  filter(n > 30) |>  # Filter for players with more than 530 receptions
   inner_join(receiver_teams, by = c("season", "receiver_id", "receiver"))
 
 # Create Lagged Data for Year-over-Year Analysis
@@ -82,20 +79,24 @@ ryoe_plot_on_new_teams <-
   ggplot(ryoe_lag_r |> filter(changed_team == TRUE), aes(x = ryoe_per_last, y = ryoe_per)) +
   geom_image(aes(image = headshot_url), size = 0.1) +
   labs(title = "RYOE Per Reception: 2023 vs. 2024 | Players who switched teams in 2024",
-       subtitle = "Minimum 50 catches both seasons | Data: nflfastR | Chart: @dumbanalytics",
+       subtitle = "Minimum 30 catches both seasons | Data: nflfastR | Chart: @dumbanalytics",
        x = "RYOE Per Reception 2023",
        y = "RYOE Per Reception 2024") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
   theme_minimal()
 
+ggsave("ryoe_plot_on_new_teams_receiving.png", width = 10, height = 6, dpi = 300, bg = "white")
+
 ryoe_plot_on_same_teams <-
   ggplot(ryoe_lag_r |> filter(changed_team == FALSE), aes(x = ryoe_per_last, y = ryoe_per)) +
   geom_image(aes(image = headshot_url), size = 0.1) +
   labs(title = "RYOE Per Reception: 2023 vs. 2024 | Players who stayed with team in 2024",
-       subtitle = "Minimum 50 catches both seasons | Data: nflfastR | Chart: @dumbanalytics",
+       subtitle = "Minimum 30 catches both seasons | Data: nflfastR | Chart: @dumbanalytics",
        x = "RYOE Per Reception 2023",
        y = "RYOE Per Reception 2024") +
   geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
   geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
   theme_minimal()
+
+ggsave("ryoe_plot_on_same_teams_receiving.png", width = 10, height = 6, dpi = 300, bg = "white")
