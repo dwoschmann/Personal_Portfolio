@@ -20,7 +20,7 @@ pbp_r_kelce_ryoe <-
   pbp_r_kelce |>
   group_by(season, receiver_id) |>
   summarize(
-    n = n(),
+    n = sum(complete_pass),
     ryoe_total = sum(ryoe),
     ryoe_per = mean(ryoe),
     yards_per_catch = mean(receiving_yards),
