@@ -4,7 +4,7 @@ library(broom)
 library(dplyr)
 
 
-pbp_r <- load_pbp(2021:2024)
+pbp_r <- load_pbp(2024)
 
 pbp_r_run <- pbp_r |>
   filter(play_type == "run" &
@@ -41,7 +41,7 @@ print(summary(expected_yards_rushing_r))
 ## Analyze RYOE
 ryoe_r <-
   pbp_r_run |>
-  group_by(season, rusher_id, rusher) |>
+  group_by(season, posteam) |>
   summarize(
     carries = n(), ryoe_total = sum(ryoe),
     ryoe_per = mean(ryoe), yards_per_carry = mean(rushing_yards)
@@ -53,7 +53,7 @@ ryoe_r <-
 repa_r <-
   pbp_r_run |>
   filter(play_type == "run") |>
-  group_by(season, rusher_id, rusher) |>
+  group_by(season, posteam) |>
   summarize(
     carries = n(), epa_total = sum(epa),
     epa_per = mean(epa), yards_per_carry = mean(rushing_yards)
@@ -62,7 +62,7 @@ repa_r <-
 
 ryoe_repa_rushing_r  <-
   repa_r |>
-  inner_join(ryoe_r, by = c("rusher_id", "rusher", "season", "carries", "yards_per_carry")) |>
+  inner_join(ryoe_r, by = c("posteam", "season", "carries", "yards_per_carry")) |>
   ungroup()
 
 
@@ -102,7 +102,7 @@ print(summary(expected_yards_passing_r))
 ## Analyze PYOE
 pyoe_r <-
   pbp_r_passing |>
-  group_by(season, passer_id, passer) |>
+  group_by(season, posteam) |>
   summarize(
     pass_attempts = n(), pyoe_total = sum(pyoe),
     pyoe_per = mean(pyoe), yards_per_pass = mean(passing_yards)
@@ -114,16 +114,16 @@ pyoe_r <-
 pepa_r <-
   pbp_r_passing |>
   filter(play_type == "pass") |>
-  group_by(season, passer_id, passer) |>
+  group_by(season, posteam) |>
   summarize(
     pass_attempts = n(), pyoe_total = sum(pyoe),
     pyoe_per = mean(pyoe), yards_per_pass = mean(passing_yards)
   ) |>
   filter(pass_attempts > 100)
 
-pyoe_pepa_rushing_r  <-
+pyoe_pepa_passing_r  <-
   pepa_r |>
-  inner_join(pyoe_r, by = c("passer_id", "passer", "season", "pass_attempts", "yards_per_pass", "pyoe_total", "pyoe_per")) |>
+  inner_join(pyoe_r, by = c("posteam", "season", "pass_attempts", "yards_per_pass", "pyoe_total", "pyoe_per")) |>
   ungroup()
 
 
@@ -144,3 +144,12 @@ passing_summary <- pbp_r_passing |>
     yards_sd = sd(passing_yards, na.rm = TRUE),
     epa_sd = sd(epa, na.rm = TRUE)
   )
+
+rushing_summary
+passing_summary
+
+
+## Combine EPA, RYOE, PYOE for each team
+team_epa_pyoe_ryoe <-
+  ryoe_repa_rushing_r |>
+  inner_join(pyoe_pepa_passing_r, by = c("posteam", "season"))
