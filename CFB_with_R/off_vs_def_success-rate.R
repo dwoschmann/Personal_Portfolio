@@ -1,14 +1,4 @@
 library(cfbfastR)
-
-if (!requireNamespace('pacman', quietly = TRUE)){
-  install.packages('pacman')
-}
-pacman::p_load(tidyverse, zoo, ggimage, gt)
-
-
-ls("package:cfbfastR")
-
-
 team_info <- cfbd_team_info()
 team_logos <- team_info[, c("school", "logo")]
 
@@ -41,8 +31,8 @@ ggplot(team_avg_success_table, aes(x = avg_off_success_rate, y = avg_def_success
   geom_hline(yintercept = mean(team_avg_success_table$avg_def_success_rate), linetype = "dashed", color = "gray") +
   geom_vline(xintercept = mean(team_avg_success_table$avg_off_success_rate), linetype = "dashed", color = "gray") +
   labs(
-    title = "Average Offensive vs Defensive Success Rate (Weeks 1-2)",
-    subtitle = "Through Week 1 | Data: cfbfastr | Chart: Daniel Oschmann",
+    title = "Average Offensive vs Defensive Success Rate",
+    caption = "Data: cfbfastr | Chart: @dumbanalytics",
     x = "Offensive Success Rate",
     y = "Defensive Success Rate"
   ) +
