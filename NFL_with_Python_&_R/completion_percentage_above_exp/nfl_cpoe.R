@@ -10,7 +10,7 @@ library(ggtext)
 library(ggplot2)
 library(ggrepel)
 
-qb_cpoe <- read_csv("C:\\Users\\dwosc\\PycharmProjects\\NFL_data_analysis_with_python\\cpoe_py_more.csv")
+qb_cpoe <- read_csv()
 print(qb_cpoe)
 
 # Load Team Logos
