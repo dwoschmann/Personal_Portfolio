@@ -40,6 +40,7 @@ qb_cpoe_plot <-
     force = 2
   ) +
   geom_hline(yintercept = mean_compl, linetype = "dashed", color = "gray30") +
+  geom_vline(xintercept = mean_cpoe, linetype = "dashed", color = "gray30") +
   scale_x_continuous(labels = scales::percent_format(scale = 1)) +
   scale_y_continuous(labels = scales::percent_format(scale = 1)) +
   labs(
