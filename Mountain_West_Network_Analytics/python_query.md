@@ -38,10 +38,10 @@ df_22_23 = sdsu_viewership_22_23.parse(sheet_name=0)
 df_22_23.to_excel("sdsu_viewership_22_23.xlsx", index=False)
 ```
 
+### 2. Load 2023–24 and 2024-25 Data
+
 > **Note**:  
 > The 2023–24 and 2024–25 data were formatted consistently and combined into single Excel workbooks with separate sheets per sport, making them much easier to process and query in Python.
-
-### 2. Load 2023–24 and 2024-25 Data
 
 ```python
 sdsu_viewership_23_24 = pd.ExcelFile(r"C:\Job Stuff\MW Live Streaming Data (Day of Event Only) 2023-2024.xlsx")
