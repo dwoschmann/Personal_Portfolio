@@ -23,7 +23,7 @@ The data originally comes from three Excel files—each covering a different aca
 
 ---
 
-## 🧠 Script Breakdown
+## 🐍 Script Breakdown
 
 ### 1. Load 2022–23 Data
 
